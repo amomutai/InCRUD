@@ -1,0 +1,61 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+    
+    
+    <h:head>
+        <title>Employee System</title>
+    </h:head>
+    <h:body>
+        <center>
+            <h2>Employees Details</h2>
+            
+            <h:form>
+                Enter Name: <h:inputText required="true"  value="#{employee.employee_name}"/>
+                Enter Address: <h:inputText required="true" immediate="true" value="#{employee.employee_address}"/>
+                <h:commandButton value="Add Employee" action="#{employee.addEmployee()}"/>
+            </h:form>
+            
+            <h:dataTable value="#{employee.employeeList}" var="emp">
+                <h:column>
+                    <f:facet name="header">Employee ID</f:facet>
+                    <h:outputText value="#{emp.employee_id}"/>
+                </h:column>
+                
+                <h:column>
+                    <f:facet name="header">Employee Name</f:facet>
+                    <h:outputText value="#{emp.employee_name}"/>
+
+                </h:column>
+                
+                <h:column>
+                    <f:facet name="header">Employee Address</f:facet>
+                    <h:outputText value="#{emp.employee_address}"/>
+
+                </h:column>
+                
+                <h:column>
+                    <f:facet name="header">Edit</f:facet>
+                    <h:form>
+                        <h:commandButton value="Edit" action="#{employee.editEmployee()}">
+                            <f:param name="action" value="#{emp.employee_id}"/>
+                        </h:commandButton>
+                    </h:form>
+                </h:column>
+                
+                <h:column>
+                    <f:facet name="header">Delete</f:facet>
+                    <h:form>
+                        <h:commandButton value="Delete" action="#{employee.deleteEmployee()}">
+                            <f:param name="action" value="#{emp.employee_id}"/>
+                        </h:commandButton>
+                    </h:form>
+                </h:column> 
+            </h:dataTable>
+        </center>
+    </h:body>
+</html>
+
